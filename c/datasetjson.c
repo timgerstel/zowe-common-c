@@ -59,14 +59,6 @@ static char vsamCSITypes[5] = {'R', 'D', 'G', 'I', 'C'};
 static char getRecordLengthType(char *dscb);
 static int getMaxRecordLength(char *dscb);
 
-typedef struct DatasetName_tag {
-  char value[44]; /* space-padded */
-} DatasetName;
-
-typedef struct DatasetMemberName_tag {
-  char value[8]; /* space-padded */
-} DatasetMemberName;
-
 typedef struct DDName_tag {
   char value[8]; /* space-padded */
 } DDName;
@@ -528,7 +520,7 @@ void addMemberedDatasetMetadata(char *datasetName, int nameLength,
 #define DSPATH_PREFIX   "//\'"
 #define DSPATH_SUFFIX   "\'"
 
-static bool isDatasetPathValid(const char *path) {
+bool isDatasetPathValid(const char *path) {
 
   /* Basic check. The fopen() dataset path format is //'dsn(member)' */
 
@@ -613,7 +605,7 @@ static bool isDatasetPathValid(const char *path) {
 
 }
 
-static void extractDatasetAndMemberName(const char *datasetPath,
+void extractDatasetAndMemberName(const char *datasetPath,
                                         DatasetName *dsn,
                                         DatasetMemberName *memberName) {
 

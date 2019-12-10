@@ -48,6 +48,17 @@ typedef struct StatefulACB_tag {
   } argPtr;
 } StatefulACB;
 
+typedef struct DatasetName_tag {
+  char value[44]; /* space-padded */
+} DatasetName;
+
+typedef struct DatasetMemberName_tag {
+  char value[8]; /* space-padded */
+} DatasetMemberName;
+
+
+bool isDatasetPathValid(const char* path);
+void extractDatasetAndMemberName(const char *datasetPath, DatasetName *dsn, DatasetMemberName *memberName);
 int streamDataset(Socket *socket, char *filename, int recordLength, jsonPrinter *jPrinter);
 int streamVSAMDataset(HttpResponse* response, char *acb, int maxRecordLength, int maxRecords, int maxBytes, int keyLoc, int keyLen, jsonPrinter *jPrinter);
 void addDetailedDatasetMetadata(char *datasetName, int nameLength,
